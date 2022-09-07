@@ -25,7 +25,17 @@ const ejecutar = async (run) => {
     const save = async (obj, ruta) =>{
         try{
             const data = await leerJSON(ruta)
-            obj.id = data.length + 1
+            if(data.length >= 1){
+                let numeroId = data[data.length-1].id
+                do {
+                    numeroId += 1
+                } while (data.some(p => p.id === numeroId))
+                obj.id = numeroId
+                console.log(`El ID asignado es: ${numeroId}`)
+            }else{
+                obj.id = 1
+                console.log(`El ID asignado es: 1`)
+            }
             data.push(obj)
             await escribirJSON(ruta, data)
         }catch (error) {
