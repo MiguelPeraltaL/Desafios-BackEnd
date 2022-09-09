@@ -3,7 +3,7 @@ const fs = require('fs')
 const ejecutar = async (run) => {
     if (!run) return
   
-    async function leerJSON(ruta) {
+    async function leerTxt(ruta) {
         try{
             const contenido = await fs.promises.readFile(ruta, 'utf-8')
             return JSON.parse(contenido)
@@ -13,7 +13,7 @@ const ejecutar = async (run) => {
         }
     }
     
-    async function escribirJSON(ruta, contenido) {
+    async function escribirTxt(ruta, contenido) {
         try{
             await fs.promises.writeFile(ruta, JSON.stringify(contenido, null, 2), 'utf-8')
         }catch (error) {
@@ -24,7 +24,7 @@ const ejecutar = async (run) => {
 
     const save = async (obj, ruta) =>{
         try{
-            const data = await leerJSON(ruta)
+            const data = await leerTxt(ruta)
             if(data.length >= 1){
                 let numeroId = data[data.length-1].id
                 do {
@@ -37,7 +37,7 @@ const ejecutar = async (run) => {
                 console.log(`El ID asignado es: 1`)
             }
             data.push(obj)
-            await escribirJSON(ruta, data)
+            await escribirTxt(ruta, data)
         }catch (error) {
             console.log('Error save:', error)
             throw new Error(error.message)
@@ -46,7 +46,7 @@ const ejecutar = async (run) => {
 
     const getById = async (id, ruta) =>{
         try{
-            const data = await leerJSON(ruta)
+            const data = await leerTxt(ruta)
             const objeto = data.filter(producto => producto.id === id)
             objeto.length >= 1 ? console.log(objeto) : console.log(`Producto ID ${id} no existe`)
         }catch (error) {
@@ -57,7 +57,7 @@ const ejecutar = async (run) => {
 
     const getAll = async (ruta) =>{
         try{
-            const data = await leerJSON(ruta)
+            const data = await leerTxt(ruta)
             console.log(data)
         }catch (error) {
             console.log('Error getAll:', error)
@@ -67,9 +67,9 @@ const ejecutar = async (run) => {
 
     const deleteById = async (id, ruta) =>{
         try{
-            const data = await leerJSON(ruta)
+            const data = await leerTxt(ruta)
             const objeto = data.filter(producto => producto.id !== id)
-            await escribirJSON(ruta, objeto)
+            await escribirTxt(ruta, objeto)
         }catch (error) {
             console.log('Error deleteById:', error)
             throw new Error(error.message)
@@ -82,7 +82,7 @@ const ejecutar = async (run) => {
             //por esta razón preferí sobreescribir el archivo con un arreglo vacio.
             //En caso de haber pedido eliminar el archivo habría utilizado unlink.
             const arrayVacio = []
-            await escribirJSON(ruta, arrayVacio)
+            await escribirTxt(ruta, arrayVacio)
         }catch (error) {
             console.log('Error deleteAll:', error)
             throw new Error(error.message)
@@ -94,11 +94,11 @@ const ejecutar = async (run) => {
         //pero creo que es más conveniente porque la función deja de ser  
         //tan específica y se podrían utilizar con archivos de otras rutas.
         const nuevoObjeto = {id:0, title:"Lapiz", price:28, stock:5}
-        save(nuevoObjeto, './productos.json')
-        getById(2, './productos.json')
-        getAll('./productos.json')
-        deleteById(4, './productos.json')
-        deleteAll('./productos.json')
+        save(nuevoObjeto, './productos.txt')
+        getById(25, './productos.txt')
+        getAll('./productos.txt')
+        deleteById(27, './productos.txt')
+        deleteAll('./productos.txt')
     } catch (error) {
       console.log('Error ejecución:', error)
       throw new Error(error.message)
