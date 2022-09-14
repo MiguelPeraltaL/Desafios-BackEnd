@@ -1,8 +1,7 @@
 const fs = require('fs')
 
-const ejecutar = async (run) => {
-    if (!run) return
-  
+const ejecutar = async (opcion) => {
+
     async function leerTxt(ruta) {
         try{
             const contenido = await fs.promises.readFile(ruta, 'utf-8')
@@ -55,10 +54,26 @@ const ejecutar = async (run) => {
         }
     }
 
+    const getRandom = async (ruta) =>{
+        try{
+            const data = await leerTxt(ruta)
+            let aleatorio = Math.floor(Math.random() * ((data.length-1) - 0) + 0)
+            // aleatorio >= 0 ? return data[aleatorio] : console.log(`No existen productos`)
+            if (aleatorio >= 0){
+              return data[aleatorio]
+            } else {
+              console.log("No existen productos")
+            }
+        }catch (error) {
+            console.log('Error getById:', error)
+            throw new Error(error.message)
+        }
+    }
+
     const getAll = async (ruta) =>{
         try{
             const data = await leerTxt(ruta)
-            console.log(data)
+            return data
         }catch (error) {
             console.log('Error getAll:', error)
             throw new Error(error.message)
@@ -78,9 +93,6 @@ const ejecutar = async (run) => {
 
     const deleteAll = async (ruta) =>{
         try{
-            //En el desafio indica que se deben eliminar todos los objetos, 
-            //por esta razón preferí sobreescribir el archivo con un arreglo vacio.
-            //En caso de haber pedido eliminar el archivo habría utilizado unlink.
             const arrayVacio = []
             await escribirTxt(ruta, arrayVacio)
         }catch (error) {
@@ -90,18 +102,35 @@ const ejecutar = async (run) => {
     }
   
     try {
-        //El desafío no pide entregar la ruta del archivo como parámetro,  
-        //pero creo que es más conveniente porque la función deja de ser  
-        //tan específica y se podrían utilizar con archivos de otras rutas.
-        const nuevoObjeto = {id:0, title:"Lapiz", price:28, stock:5}
-        save(nuevoObjeto, './productos.txt')
-        getById(25, './productos.txt')
-        getAll('./productos.txt')
-        deleteById(27, './productos.txt')
-        deleteAll('./productos.txt')
+        switch (opcion){
+          case 'save':
+            const nuevoObjeto = {id:0, title:"Lapiz", price:28, stock:5}
+            save(nuevoObjeto, './productos.txt')
+            break
+          case 'getById':
+            let objetoById = await getById(25, './productos.txt')
+            return objetoById
+            // break
+          case 'getAll':
+            let arregloProductos = await getAll('./productos.txt')
+            return arregloProductos
+            // break
+          case 'objetoRandom':
+            let objetoRandom = await getRandom('./productos.txt')
+            return objetoRandom
+            // break
+          case 'deleteById':
+            deleteById(27, './productos.txt')
+            break
+          case 'deleteAll':
+            deleteAll('./productos.txt')
+            break
+          default:
+            break
+        }
     } catch (error) {
       console.log('Error ejecución:', error)
       throw new Error(error.message)
     }
 }
-ejecutar(true)
+module.exports.ejecutar = ejecutar
