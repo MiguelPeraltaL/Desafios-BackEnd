@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Agregar producto</h2>
+    <form action="http://localhost:8080/api/productos" method="post">
+        <input type="text" name="title" required placeholder="Nombre"/>
+        <input type="number" name="price" required placeholder="Precio"/>
+        <input type="number" name="stock" required placeholder="Stock"/>
+        <button type="submit">Enviar</button>
+    </form>
+    <script src="index.js"></script>
+</body>
+</html>
