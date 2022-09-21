@@ -28,11 +28,5 @@
     "title": "sacapuntas",
     "price": "8",
     "stock": "10"
-  },
-  {
-    "id": 6,
-    "title": "corchetes",
-    "price": "18",
-    "stock": "15"
   }
 ]

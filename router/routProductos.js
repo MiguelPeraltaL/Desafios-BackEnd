@@ -49,7 +49,7 @@ router.put('/:id', (req, res) => {
         if(!run) return
         try{
             let idParam = req.params
-            const data = { id: idParam, ...req.body }
+            const data = { id: parseInt(idParam.id), ...req.body }
             let objetoActualizado = await funcIndex.ejecutar("updateById", data)
             res.status(201).json(objetoActualizado).end()
         }catch (error) {

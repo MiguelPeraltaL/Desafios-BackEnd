@@ -2,10 +2,12 @@ const express = require('express')
 const { Router } = express
 const router = Router()
 const routProductos = require('./router/routProductos.js')
+
 const app = express()
 const bodyParser = require("body-parser")
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+
 const PORT = 8080
 // const PORT = process.env.PORT
 // const ENV = process.env.NODE_ENV
