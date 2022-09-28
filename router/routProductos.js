@@ -9,7 +9,8 @@ router.post('/', (req, res) => {
         try{
             const data = { id: 0, ...req.body }
             let objetoResultado = await funcIndex.ejecutar("save", data)
-            res.status(201).json(objetoResultado).end()
+            // res.status(201).json(objetoResultado).end()
+            res.redirect("http://localhost:8080/api/productos")
         }catch (error) {
             console.log('Error router getById:', error)
             throw new Error(error.message)
@@ -22,7 +23,8 @@ router.get('/', (req, res) => {
         if(!run) return
         try{
             let arregloProductos = await funcIndex.ejecutar("getAll")
-            res.status(200).json(arregloProductos).end()
+            // res.status(200).json(arregloProductos).end()
+            res.render('verProductos', { arregloProductos })
         }catch (error) {
             console.log('Error router getAll:', error)
             throw new Error(error.message)

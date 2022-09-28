@@ -1,0 +1,14 @@
+extends layout
+
+block content
+    h1="Detalle Productos"
+    a(href="http://localhost:8080/api/productos") Ver Productos
+    br
+    br
+    form(action="http://localhost:8080/api/productos", method="post")
+        input(type="text", name="title", required, placeholder="Nombre")
+        input(type="number", name="price", required, placeholder="Precio")
+        input(type="number", name="stock", required, placeholder="Stock")
+        input(type="text", name="imagen", required, placeholder="URL Imagen")
+        button(type="submit") Enviar
+    

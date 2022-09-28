@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  h1 Detalle Productos
+  a(href="http://localhost:8080/") Crear Productos
+  br
+  br
+  table
+    tr
+        th ID
+        th Nombre
+        th Precio
+        th Foto
+    if !arregloProductos.length
+      tr
+        td= "No hay usuarios registrados aún"
+    each p in arregloProductos
+        tr
+            td= p.id
+            td= p.title
+            td= p.price
+            td
+                img(src=p.imagen, alt= p.title, width="20 px")

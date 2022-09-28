@@ -37,6 +37,8 @@ const ejecutar = async (opcion, id) => {
                 obj.id = 1
                 console.log(`El ID asignado es: 1`)
             }
+            obj.price = parseInt(obj.price)
+            obj.stock = parseInt(obj.stock)
             data.push(obj)
             await escribirTxt(ruta, data)
             return obj
