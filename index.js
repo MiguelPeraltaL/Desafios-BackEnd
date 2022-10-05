@@ -1,32 +1,27 @@
 const express = require('express')
-const { Router } = express
-const router = Router()
-const routProductos = require('./router/routProductos.js')
+const http = require('http')
+const path = require('path')
+const handlebars = require("express-handlebars")
+const routProductos = require("./router/routProductos")
+const routIndex = require("./router/routIndex")
+const { initSocket } = require('./socket')
+
+const PORT = process.env.PORT
 
 const app = express()
-const bodyParser = require("body-parser")
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
 
-// Configuración PUG
-app.set('views', './views')
-app.set('view engine', 'pug')
+app.use(express.json())
+app.use(express.urlencoded({extended: true }))
+app.use(express.static(path.join(__dirname, 'public')))
 
-// Formulario
-app.get('/', (req, res) => {
-    res.render('creaProductos')
-})
-
-// const PORT = 8080
-const PORT = process.env.PORT
-const ENV = process.env.NODE_ENV
-
-const server = app.listen(PORT, () => {
-    console.log(`Servidor http esta escuchando en el puerto ${server.address().port}`)
-    console.log(`http://localhost:${server.address().port}`)
-    console.log(`Environment:${ENV}`)
-})
+app.set("views", path.join(__dirname, "views"))
+app.engine("handlebars", handlebars.engine())
+app.set('view engine', 'handlebars')
 
 app.use('/api/productos', routProductos)
-
-server.on("error", error => console.log(`Error en servidor ${error}`))
+app.use('/', routIndex)
+const server = http.createServer(app)
+initSocket(server)
+server.listen(PORT, () => {
+    console.log(`Servidor en el puerto: ${PORT}`)
+})

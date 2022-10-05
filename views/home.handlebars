@@ -1,0 +1,23 @@
+<h1>Detalle Productos</h1>
+<form id="form-producto" action="http://localhost:8080/api/productos" method="post">
+    <input type="text", name="title", required, placeholder="Nombre">
+    <input type="number", name="price", required, placeholder="Precio">
+    <input type="number", name="stock", required, placeholder="Stock">
+    <input type="text", name="imagen", required, placeholder="URL Imagen">
+    <button type="submit">Enviar</button>
+</form>
+<br>
+<br>
+<table id="tabla-productos">
+    
+</table>
+<br>
+<br>
+<h1>Chat Comunidad</h1>
+<form id="form-message">
+    <input type="email" name="fullname" id="input-fullname" placeholder="Ingresa tu E-mail" required>
+    <input type="text" name="message" id="input-message" placeholder="Ingresa mensaje..." required>
+    <button type="submit">Enviar</button>
+</form>
+<ul id="list-messages">
+</ul>
