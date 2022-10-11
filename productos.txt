@@ -1,6 +1,7 @@
 [
   {
     "id": 1,
+    "timestamp": "20/09/2022 10:35:38",
     "title": "Escuadra",
     "price": 12,
     "stock": 5,
@@ -8,6 +9,7 @@
   },
   {
     "id": 2,
+    "timestamp": "21/09/2022 10:35:38",
     "title": "Calculadora",
     "price": 23,
     "stock": 5,
@@ -15,6 +17,7 @@
   },
   {
     "id": 3,
+    "timestamp": "22/09/2022 10:35:38",
     "title": "Globo Terráqueo",
     "price": 45,
     "stock": 5,
@@ -22,6 +25,7 @@
   },
   {
     "id": 4,
+    "timestamp": "23/09/2022 10:35:38",
     "title": "Lapiz",
     "price": 10,
     "stock": 10,
@@ -29,6 +33,7 @@
   },
   {
     "id": 5,
+    "timestamp": "24/09/2022 10:35:38",
     "title": "Acuarela",
     "price": 17,
     "stock": 10,
@@ -36,6 +41,7 @@
   },
   {
     "id": 6,
+    "timestamp": "25/09/2022 10:35:38",
     "title": "Pizarra",
     "price": 28,
     "stock": 1,

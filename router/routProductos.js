@@ -2,17 +2,19 @@ const funcIndex = require('./productos.js')
 const express = require('express')
 const { Router } = express
 const router = Router()
+const dayjs = require('dayjs')
 
 router.post('/', (req, res) => {
     (async (run) => {
         if(!run) return
         try{
-            const data = { id: 0, ...req.body }
+            let ahora = dayjs()
+            const data = { id: 0, timestamp: ahora.format("DD/MM/YYYY HH:mm:ss"), ...req.body }
             let objetoResultado = await funcIndex.ejecutar("save", data)
             // res.status(201).json(objetoResultado).end()
             res.redirect("http://localhost:8080/")
         }catch (error) {
-            console.log('Error router getById:', error)
+            console.log('Error router post:', error)
             throw new Error(error.message)
         }
     })(true)
@@ -51,7 +53,8 @@ router.put('/:id', (req, res) => {
         if(!run) return
         try{
             let idParam = req.params
-            const data = { id: parseInt(idParam.id), ...req.body }
+            let ahora = dayjs()
+            const data = { id: parseInt(idParam.id), timestamp: ahora.format("DD/MM/YYYY HH:mm:ss"), ...req.body }
             let objetoActualizado = await funcIndex.ejecutar("updateById", data)
             res.status(201).json(objetoActualizado).end()
         }catch (error) {

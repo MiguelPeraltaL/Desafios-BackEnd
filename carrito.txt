@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1,
+    "timestamp": "20/09/2022 10:35:38",
+    "producto": [
+      {
+        "id": 1,
+        "timestamp": "20/09/2022 10:35:38",
+        "title": "Escuadra",
+        "price": 12,
+        "stock": 5,
+        "imagen": "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-512.png"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "timestamp": "10/10/2022 00:59:27",
+    "producto": [
+      {
+        "id": 5,
+        "timestamp": "24/09/2022 10:35:38",
+        "title": "Acuarela",
+        "price": 17,
+        "stock": 10,
+        "imagen": "https://cdn3.iconfinder.com/data/icons/education-209/64/paint-color-pallete-brush-academy-512.png"
+      },
+      {
+        "id": 4,
+        "timestamp": "23/09/2022 10:35:38",
+        "title": "Lapiz",
+        "price": 10,
+        "stock": 10,
+        "imagen": "https://cdn3.iconfinder.com/data/icons/education-209/64/pencil-pen-stationery-school-512.png"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "timestamp": "10/10/2022 00:59:27",
+    "producto": [
+      {
+        "id": 5,
+        "timestamp": "24/09/2022 10:35:38",
+        "title": "Acuarela",
+        "price": 17,
+        "stock": 10,
+        "imagen": "https://cdn3.iconfinder.com/data/icons/education-209/64/paint-color-pallete-brush-academy-512.png"
+      },
+      {
+        "id": 1,
+        "timestamp": "20/09/2022 10:35:38",
+        "title": "Escuadra",
+        "price": 12,
+        "stock": 5,
+        "imagen": "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-512.png"
+      },
+      {
+        "id": 4,
+        "timestamp": "23/09/2022 10:35:38",
+        "title": "Lapiz",
+        "price": 10,
+        "stock": 10,
+        "imagen": "https://cdn3.iconfinder.com/data/icons/education-209/64/pencil-pen-stationery-school-512.png"
+      }
+    ]
+  }
+]
