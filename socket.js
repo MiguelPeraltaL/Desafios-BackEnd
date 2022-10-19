@@ -1,18 +1,25 @@
 const { Server } = require('socket.io')
 const axios = require('axios')
 const dayjs = require('dayjs')
+const { createTable2, insertMessages, selectMessages } = require('./db/index')
 
 let io
 
-let ahora = dayjs()
+// let ahora = dayjs()
 
-let messages = [
-    {
-      fullname: 'Bienvenido@coderhouse.com',
-      fecha: ahora.format("DD/MM/YYYY HH:mm:ss"),
-      message: 'Bienvenidos'
-    },
-  ]
+// let messages = [
+//     {
+//       fullname: 'Bienvenido@coderhouse.com',
+//       fecha: ahora.format("DD/MM/YYYY HH:mm:ss"),
+//       message: 'Bienvenidos'
+//     },
+//   ]
+
+let messages = []
+const leer = async() =>{
+    messages = await selectMessages() 
+}
+leer()
 
 function initSocket(httpServer) {
     io = new Server(httpServer)
@@ -36,10 +43,12 @@ function setEvent(io){
             socketCliente.emit('total-productos', response.data)
         }, 1000)
 
-        socketCliente.on('new-message', (data) => {
+        socketCliente.on('new-message', async(data) => {
             let ahora = dayjs()
             data.fecha = ahora.format("DD/MM/YYYY HH:mm:ss")
             messages.push(data)
+            await createTable2()
+            await insertMessages(data)
             io.emit('notification', data)
         })
 

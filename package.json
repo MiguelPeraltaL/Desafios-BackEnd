@@ -25,9 +25,12 @@
     "express": "^4.18.1",
     "express-handlebars": "^6.0.6",
     "express-useragent": "^1.0.15",
+    "knex": "^2.3.0",
+    "mysql": "^2.18.1",
     "node-fetch": "^3.2.10",
     "pug": "^3.0.2",
-    "socket.io": "^4.5.2"
+    "socket.io": "^4.5.2",
+    "sqlite3": "^5.1.2"
   },
   "devDependencies": {
     "dotenv": "^16.0.2",
