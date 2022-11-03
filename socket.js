@@ -1,7 +1,7 @@
 const { Server } = require('socket.io')
 const axios = require('axios')
 const dayjs = require('dayjs')
-const { createTable2, insertMessages, selectMessages } = require('./db/index')
+const { createTable2, insertMessages, selectMessages } = require('./daos/db/dbProdMesMySqlite')
 
 let io
 

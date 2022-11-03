@@ -1,4 +1,4 @@
-const { createTable, insertProducts, selectProducts } = require('../db/index')
+const { createTable, insertProducts, selectProducts } = require('../daos/db/dbProdMesMySqlite')
 
 const ejecutardb = async (opcion, parametro) => {
 

@@ -34,7 +34,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"title\": \"mochila\",\r\n    \"price\": \"18\",\r\n    \"stock\": \"15\",\r\n    \"imagen\": \"https://cdn3.iconfinder.com/data/icons/education-209/64/bag-pack-container-school-512.png\"\r\n}",
+					"raw": "{\r\n    \"timestamp\": \"25/09/2022 10:35:38\",\r\n    \"title\": \"Pizarra\",\r\n    \"price\": 28,\r\n    \"stock\": 1,\r\n    \"imagen\": \"https://cdn3.iconfinder.com/data/icons/education-209/64/board-math-class-school-512.png\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -63,7 +63,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/productos/24",
+					"raw": "http://localhost:8080/api/productos/d011413d-c139-4abf-9ec9-ca9a13d4a04e",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -72,7 +72,7 @@
 					"path": [
 						"api",
 						"productos",
-						"24"
+						"d011413d-c139-4abf-9ec9-ca9a13d4a04e"
 					]
 				},
 				"description": "Buscar productos por su ID"

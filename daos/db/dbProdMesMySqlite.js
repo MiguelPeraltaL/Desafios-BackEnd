@@ -29,6 +29,8 @@ const options2 = {
     },
   }
 
+//////////////////////// MySQL ////////////////////////
+
 const createTable = async () =>{
     const knexInstance = knex(options)
     try{
@@ -87,7 +89,7 @@ const selectProducts = async () =>{
     }
 }
 
-//////////////////// SQLite3 ///////////////////////
+/////////////////////// SQLite3 ///////////////////////
 
 const createTable2 = async () =>{
     const knexInstance = knex(options2)

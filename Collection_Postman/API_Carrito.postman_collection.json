@@ -14,7 +14,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"producto\": 5\r\n}",
+					"raw": "{\r\n    \"producto\": \"d011413d-c139-4abf-9ec9-ca9a13d4a04e\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -43,7 +43,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"producto\": 4\r\n}",
+					"raw": "{\r\n    \"producto\": \"e0681398-2997-4b9d-8e6e-e5902ccf1353\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -51,7 +51,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/carrito/3",
+					"raw": "http://localhost:8080/api/carrito/3dc4b9f8-c9f0-41e2-b4d6-ea9f2c55434d",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -60,7 +60,7 @@
 					"path": [
 						"api",
 						"carrito",
-						"3"
+						"3dc4b9f8-c9f0-41e2-b4d6-ea9f2c55434d"
 					]
 				},
 				"description": "Agregar producto a carrito"
@@ -73,7 +73,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/carrito/3",
+					"raw": "http://localhost:8080/api/carrito/2621f127-f8c3-4699-9b77-727b7c1e1812",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -82,7 +82,7 @@
 					"path": [
 						"api",
 						"carrito",
-						"3"
+						"2621f127-f8c3-4699-9b77-727b7c1e1812"
 					]
 				},
 				"description": "Muestra los productos de un carrito"
@@ -95,7 +95,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/carrito/3",
+					"raw": "http://localhost:8080/api/carrito/3dc4b9f8-c9f0-41e2-b4d6-ea9f2c55434d",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -104,7 +104,7 @@
 					"path": [
 						"api",
 						"carrito",
-						"3"
+						"3dc4b9f8-c9f0-41e2-b4d6-ea9f2c55434d"
 					]
 				},
 				"description": "Eliminar carrito por ID carrito"
@@ -117,7 +117,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/carrito/3/productos/4",
+					"raw": "http://localhost:8080/api/carrito/2621f127-f8c3-4699-9b77-727b7c1e1812/productos/4535ddef-381e-4b9c-b0f5-e1ea57f43a8b",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -126,9 +126,9 @@
 					"path": [
 						"api",
 						"carrito",
-						"3",
+						"2621f127-f8c3-4699-9b77-727b7c1e1812",
 						"productos",
-						"4"
+						"4535ddef-381e-4b9c-b0f5-e1ea57f43a8b"
 					]
 				},
 				"description": "Eliminar producto de un carrito por ID carrito y ID producto"
