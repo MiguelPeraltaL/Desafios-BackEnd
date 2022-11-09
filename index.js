@@ -5,12 +5,12 @@ const handlebars = require("express-handlebars")
 const routProductos = require("./router/routProductos")
 const routCarrito = require("./router/routCarrito")
 const routIndex = require("./router/routIndex")
+const routProductosTest = require("./router/routProductosTest")
 const { initSocket } = require('./socket')
 
 const PORT = process.env.PORT
 
 const app = express()
-
 app.use(express.json())
 app.use(express.urlencoded({extended: true }))
 app.use(express.static(path.join(__dirname, 'public')))
@@ -32,6 +32,7 @@ app.use(validaUsuario)
 //////////////////////////////
 
 app.use('/api/productos', routProductos)
+app.use('/api/productos-test', routProductosTest)
 app.use('/api/carrito', routCarrito)
 app.use('/', routIndex)
 

@@ -27,7 +27,7 @@ const selectProductos = async () =>{
         const querySnapshot = await query.get()
         let docs = querySnapshot.docs
         const response = docs.map(doc => ({ id: doc.id, ...doc.data() }))
-        console.log('Productos obtenidos con éxito! ->', response)
+        // console.log('Productos obtenidos con éxito! ->', response)
         return response
     }catch (error) {
         console.error('Error selectProductos:', error.message)

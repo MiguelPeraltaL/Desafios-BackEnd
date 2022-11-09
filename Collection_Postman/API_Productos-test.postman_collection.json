@@ -1,0 +1,31 @@
+{
+	"info": {
+		"_postman_id": "7b7938e9-5c55-4acd-9ecf-571ec1e3cab4",
+		"name": "API_Productos-test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21259953"
+	},
+	"item": [
+		{
+			"name": "Obtener productos test (faker)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/productos-test",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"productos-test"
+					]
+				},
+				"description": "Entrega 5 productos con faker"
+			},
+			"response": []
+		}
+	]
+}

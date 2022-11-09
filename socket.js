@@ -1,23 +1,27 @@
 const { Server } = require('socket.io')
 const axios = require('axios')
 const dayjs = require('dayjs')
-const { createTable2, insertMessages, selectMessages } = require('./daos/db/dbProdMesMySqlite')
+// const { createTable2, insertMessages, selectMessages } = require('./daos/db/dbProdMesMySqlite')
+const { createMessage, selectMessages } = require('./daos/db/dbMessagesFireBase.js')
+const { schema, normalize, denormalize } = require('normalizr')
 
 let io
 
-// let ahora = dayjs()
+const authorSchema = new schema.Entity('autores')
 
-// let messages = [
-//     {
-//       fullname: 'Bienvenido@coderhouse.com',
-//       fecha: ahora.format("DD/MM/YYYY HH:mm:ss"),
-//       message: 'Bienvenidos'
-//     },
-//   ]
+const messagesSchema = new schema.Entity('mensajes', {
+  author: authorSchema
+})
 
 let messages = []
 const leer = async() =>{
-    messages = await selectMessages() 
+    let arregloMensajes = await selectMessages()
+    const objetoMensaje = {
+        id:'mensajes',
+        mensajes: arregloMensajes
+    }
+    messages = normalize(objetoMensaje, messagesSchema)
+    // messages = await selectMessages()
 }
 leer()
 
@@ -41,14 +45,15 @@ function setEvent(io){
         setInterval(async ()=>{
             let response = await axios(config)
             socketCliente.emit('total-productos', response.data)
-        }, 1000)
+        }, 5000)
 
         socketCliente.on('new-message', async(data) => {
             let ahora = dayjs()
             data.fecha = ahora.format("DD/MM/YYYY HH:mm:ss")
             messages.push(data)
-            await createTable2()
-            await insertMessages(data)
+            // await createTable2()
+            // await insertMessages(data)
+            await createMessage(data)
             io.emit('notification', data)
         })
 
