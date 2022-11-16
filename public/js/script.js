@@ -10,6 +10,10 @@
     const listMessages = document.getElementById('list-messages')
     const porcentaje = document.getElementById('porcentaje')
     const tablaProductos = document.getElementById('tabla-productos')
+    const formLogout = document.getElementById('form-logout')
+    const cabecera = document.getElementById('cabecera')
+    const nombre = document.getElementById('nombre')
+    var nombre2 = nombre.getAttribute('name')
 
     let messages = []
 
@@ -31,6 +35,16 @@
             </tr>
         `
     }
+
+    formLogout.addEventListener('submit', (event) => {
+        event.preventDefault()
+        cabecera.innerHTML = `Hasta luego ${nombre2}`
+        formLogout.innerHTML = ''
+        socket.emit('log-out')
+        setTimeout(()=>{
+            window.location.href = "http://localhost:8080/login"
+        }, 2000)
+    })
 
     formMessage.addEventListener('submit', (event) => {
         event.preventDefault()
