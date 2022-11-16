@@ -42,8 +42,8 @@ function setEvent(io){
             url: 'http://localhost:8080/api/productos',
             data: data
         }
-        // setInterval(async ()=>{
-        setTimeout(async ()=>{
+        // setTimeout(async ()=>{
+        setInterval(async ()=>{
             let response = await axios(config)
             socketCliente.emit('total-productos', response.data)
         }, 5000)
@@ -56,10 +56,6 @@ function setEvent(io){
             // await insertMessages(data)
             await createMessage(data)
             io.emit('notification', data)
-        })
-
-        socketCliente.on('log-out', async () => {
-            await axios.delete('http://localhost:8080/logout')
         })
 
         socketCliente.on('disconnection', () => {

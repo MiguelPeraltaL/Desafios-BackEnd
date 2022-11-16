@@ -36,11 +36,11 @@
         `
     }
 
-    formLogout.addEventListener('submit', (event) => {
+    formLogout.addEventListener('submit', async (event) => {
         event.preventDefault()
         cabecera.innerHTML = `Hasta luego ${nombre2}`
         formLogout.innerHTML = ''
-        socket.emit('log-out')
+        await axios.delete('http://localhost:8080/logout')
         setTimeout(()=>{
             window.location.href = "http://localhost:8080/login"
         }, 2000)
