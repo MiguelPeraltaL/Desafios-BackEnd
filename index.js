@@ -1,5 +1,6 @@
 const express = require('express')
 const session = require('express-session')
+const passport = require('passport')
 const MongoStore = require('connect-mongo')
 const http = require('http')
 const path = require('path')
@@ -8,7 +9,12 @@ const routProductos = require("./router/routProductos")
 const routCarrito = require("./router/routCarrito")
 const routIndex = require("./router/routIndex")
 const routProductosTest = require("./router/routProductosTest")
+const routAuth = require("./router/auth")
+const routUser = require("./router/users")
+
 const { initSocket } = require('./socket')
+const { Strategy } = require('passport-local')
+const Usuario = require('./daos/models/esquemasMongoose.js')
 
 const PORT = process.env.PORT
 
@@ -23,68 +29,66 @@ app.set('view engine', 'handlebars')
 
 ///////////////////////////////
 
-const advancedOptions = {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-}
-
-app.use(session({
-    store: MongoStore.create({
-      mongoUrl: 'mongodb+srv://developer:developer@cluster0.6bjy44b.mongodb.net/sesiones?retryWrites=true&w=majority',
-      mongoOptions: advancedOptions,
-      ttl: 60,
-    }),
-    secret: '3biXMV8#m5s7',
-    resave: true,
-    saveUninitialized: true,
-}))
-
-const USERNAME='asd'
-const PASSWORD='1234'
-
-const auth = (req, res, next) => {
-    const { isAuth } = req.session
-    if (isAuth) {
-        next()
-    } else{
-        res.status(403).send('No tienes permiso para estar acá!!!')
-    }
-}
-
-app.get('/login', (req, res) => {
-    res.render("login")
-})
-  
-app.post('/login', (req, res) => {
-    // const { username, password } = req.body
-    const { username } = req.body
-    // if (username === USERNAME && password === PASSWORD) {
-        req.session.username = username
-        req.session.isAuth = true
-        let data = {nombre: username}
-        // res.status(200).send('Auth OK')
-        res.render("home", data)
-    // } else {
-    //     res.status(401).send('Username or password invalid!')
-    // }
-})
-  
-app.delete('/logout', (req, res) => {
-    req.session.destroy(error => {
-        if (!error) {
-            res.send('Adios')
-        } else {
-            res.send('Ah ocurrido un error', error.message)
+passport.use('sign-in', new Strategy({
+    usernameField: 'mail',
+  }, (mail, password, done) => {
+    Usuario.findOne({ mail })
+      .then(user => {
+        if (!user) {
+          console.log(`User with ${mail} not found.`)
+          return done(null, false)
         }
-    })
-})
-
-app.get('/private', auth, (req, res) => {
-    const { username } = req.session
-    let data = {nombre: username}
-    // res.status(200).send(`Hola ${username}`)
-    res.render("home", data)
-})
+        if (password !== user.password) {
+          console.log('Invalid Password')
+          return done(null, false)
+        }
+        done(null, user)
+      })
+      .catch(error => {
+        console.log('Error in sign-in', error.message)
+        done(error)
+      })
+  }))
+  
+  passport.use('sign-up', new Strategy({
+    usernameField: 'mail',
+    passReqToCallback: true,
+  }, (req, mail, password, done) => {
+    Usuario.findOne({ mail })
+      .then(user => {
+        if (user) {
+          console.log(`User ${mail} already exists.`)
+          return done(null, false)
+        }
+        return Usuario.create(req.body)
+      })
+      .then(newUser => {
+        console.log(`User ${newUser.mail} registration succesful.`)
+        done(null, newUser)
+      })
+      .catch(error => {
+        console.log('Error in sign-up', error.message)
+        done(error)
+      })
+  }))
+  
+  passport.serializeUser((user, done) => {
+    done(null, user._id)
+  })
+  
+  passport.deserializeUser((_id, done) => {
+    Usuario.findOne({ _id })
+      .then(user => done(null, user))
+      .catch(done)
+  })
+  
+  app.use(session({
+    secret: '3!$H4s5K36#s',
+    resave: false, 
+    saveUninitialized: false,
+  }));
+  app.use(passport.initialize())
+  app.use(passport.session())
 
 ///////////////////////////////
 let isAdmin = true
@@ -101,7 +105,9 @@ app.use(validaUsuario)
 app.use('/api/productos', routProductos)
 app.use('/api/productos-test', routProductosTest)
 app.use('/api/carrito', routCarrito)
-app.use('/', routIndex)
+app.use('/home', routIndex)
+app.use('/api/auth', routAuth)
+app.use('/api/users', routUser)
 
 app.use((req, res) => {
     res.status(404).json({error: -1, descripcion: `Ruta ${req.url} método ${req.method} no implementada`})

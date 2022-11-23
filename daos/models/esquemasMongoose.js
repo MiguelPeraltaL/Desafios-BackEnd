@@ -13,9 +13,16 @@ const carritoSchema = new mongoose.Schema({
     producto: { type: Array, required: true }
 });
 
+const usuarioSchema = new mongoose.Schema({
+    mail: { type: String, required: true, unique: true },
+    password: { type: String, required: true }
+});
+
 const Producto = mongoose.model('Producto', productoSchema)
 const Carrito = mongoose.model('Carrito', carritoSchema)
+const Usuario = mongoose.model('Usuario', usuarioSchema)
 
 // module.exports = Producto
 
-module.exports = { Producto, Carrito }
+// module.exports = { Producto, Carrito, Usuario }
+module.exports = mongoose.model('Usuario', usuarioSchema)

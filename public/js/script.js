@@ -40,10 +40,11 @@
         event.preventDefault()
         cabecera.innerHTML = `Hasta luego ${nombre2}`
         formLogout.innerHTML = ''
-        await axios.delete('http://localhost:8080/logout')
+        const baseUrl = window.location.origin
         setTimeout(()=>{
-            window.location.href = "http://localhost:8080/login"
+            window.location.href = baseUrl + '/api/auth/login'
         }, 2000)
+        await axios.post(baseUrl + '/api/auth/sign-out')
     })
 
     formMessage.addEventListener('submit', (event) => {
@@ -84,7 +85,6 @@
         const resultCompresion = 100 - ((sizeNormalized * 100) / sizeOriginal)
         porcentaje.innerHTML = `Compresión: ${resultCompresion.toFixed(2)}%`
 
-        // messages = data
         listMessages.innerText = ''
         messages.forEach((message) => {
           showMessage(message)
