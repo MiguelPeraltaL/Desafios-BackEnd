@@ -11,7 +11,7 @@ const verifyAuth = (req, res, next) => {
     next()
   } else {
     // res.status(401).json({ message: 'Unauthorized to zone private.' })
-    res.redirect('http://localhost:' + PORT + '/api/auth/login')
+    res.redirect('/api/auth/login')
   }
 }
 

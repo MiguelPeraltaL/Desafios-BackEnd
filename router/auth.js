@@ -10,23 +10,31 @@ routerAuth.get('/login', (req, res) => {
     res.render("login")
 })
 
+routerAuth.get('/failureLogin', (req, res) => {
+  res.render("failureLogin")
+})
+
 routerAuth.get('/registro', (req, res) => {
     res.render("register")
 })
 
-routerAuth.post('/sign-in', passport.authenticate('sign-in'),(req, res) => {
+routerAuth.get('/failureRegister', (req, res) => {
+  res.render("failureRegister")
+})
+
+routerAuth.post('/sign-in', passport.authenticate('sign-in', {failureRedirect: '/api/auth/failureLogin'}),(req, res) => {
   const { user } = req
   if (!req.isAuthenticated()) {
     res.status(401).json({ message: 'Email or password is invalid' })
     return
   }
-  res.redirect('http://localhost:' + PORT + '/api/users/private')
+  res.redirect('/api/users/private')
 })
 
-routerAuth.post('/sign-up', passport.authenticate('sign-up'), (req, res) => {
+routerAuth.post('/sign-up', passport.authenticate('sign-up', {failureRedirect: '/api/auth/failureRegister'}), (req, res) => {
   const { user } = req
   console.log('register -> user', user)
-res.redirect('http://localhost:' + PORT + '/api/users/private')
+  res.redirect('/api/users/private')
 })
 
 routerAuth.post('/sign-out', (req, res, next) => {
@@ -35,9 +43,6 @@ routerAuth.post('/sign-out', (req, res, next) => {
     if (error) {
       return next(error)
     }
-    // setTimeout(()=>{
-    //     res.redirect('login')
-    // }, 2000)
   })
 })
 
