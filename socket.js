@@ -7,6 +7,8 @@ const { schema, normalize, denormalize } = require('normalizr')
 
 let io
 
+const PORT = 8080
+
 const authorSchema = new schema.Entity('autores')
 
 const messagesSchema = new schema.Entity('mensajes', {
@@ -39,7 +41,7 @@ function setEvent(io){
         var data = ''
         var config = {
             method: 'get',
-            url: 'http://localhost:8080/api/productos',
+            url: 'http://localhost:'+PORT+'/api/productos',
             data: data
         }
         // setTimeout(async ()=>{
