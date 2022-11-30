@@ -7,7 +7,6 @@ const { Router } = express
 const router = Router()
 const dayjs = require('dayjs')
 
-// let database = "Firebase"
 const database = process.env.DATABASE
 
 router.post('/', (req, res) => {

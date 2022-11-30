@@ -31,6 +31,7 @@
     "express-useragent": "^1.0.15",
     "firebase-admin": "^11.2.0",
     "knex": "^2.3.0",
+    "minimist": "^1.2.7",
     "mongodb": "^4.11.0",
     "mongoose": "^6.7.3",
     "mysql": "^2.18.1",

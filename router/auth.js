@@ -4,8 +4,6 @@ const passport = require('passport')
 
 const routerAuth = Router()
 
-const PORT = process.env.PORT
-
 routerAuth.get('/login', (req, res) => {
     res.render("login")
 })

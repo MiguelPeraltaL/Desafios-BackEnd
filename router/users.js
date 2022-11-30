@@ -4,8 +4,6 @@ const { createUsuario, selectUserById } = require('../daos/db/dbUsuariosMongo.js
 
 const router = Router()
 
-const PORT = process.env.PORT
-
 const verifyAuth = (req, res, next) => {
   if (req.isAuthenticated()) {
     next()

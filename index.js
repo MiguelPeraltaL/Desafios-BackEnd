@@ -1,3 +1,4 @@
+const minimist = require('minimist')
 const express = require('express')
 const session = require('express-session')
 const passport = require('passport')
@@ -11,7 +12,18 @@ const { initSocket } = require('./socket')
 const { Strategy } = require('passport-local')
 const Usuario = require('./daos/models/esquemasMongoose.js')
 
-const PORT = process.env.PORT || 8080
+const opts = {
+  default: {
+    p: 8080
+  },
+  alias: {
+    p: 'port'
+  }
+}
+const params = minimist(process.argv.slice(2), opts)
+
+const PORT = params.p
+// const PORT = process.env.PORT || 8080
 const HOST = process.env.HOST
 
 const app = express()
