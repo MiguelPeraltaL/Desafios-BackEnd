@@ -47,7 +47,6 @@ passport.use('sign-in', new Strategy({
           console.log(`User with ${mail} not found.`)
           return done(null, false)
         }
-        // if (password !== user.password) {
         if (!isValidPassword(password, user.password)) {
           console.log('Invalid Password')
           return done(null, false)
@@ -76,7 +75,6 @@ passport.use('sign-in', new Strategy({
           password: encryptPassword(password)
         }
         console.log(newUser)
-        // return Usuario.create(req.body)
         return Usuario.create(newUser)
       })
       .then(newUser => {
