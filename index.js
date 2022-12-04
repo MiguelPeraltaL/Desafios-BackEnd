@@ -7,6 +7,7 @@ const http = require('http')
 const path = require('path')
 const handlebars = require("express-handlebars")
 const router = require("./router/index")
+const { encryptPassword, isValidPassword } = require('./utils.js')
 
 const { initSocket } = require('./socket')
 const { Strategy } = require('passport-local')
@@ -46,7 +47,8 @@ passport.use('sign-in', new Strategy({
           console.log(`User with ${mail} not found.`)
           return done(null, false)
         }
-        if (password !== user.password) {
+        // if (password !== user.password) {
+        if (!isValidPassword(password, user.password)) {
           console.log('Invalid Password')
           return done(null, false)
         }
@@ -68,7 +70,14 @@ passport.use('sign-in', new Strategy({
           console.log(`User ${mail} already exists.`)
           return done(null, false)
         }
-        return Usuario.create(req.body)
+        const { body } = req
+        const newUser = {
+          ...body,
+          password: encryptPassword(password)
+        }
+        console.log(newUser)
+        // return Usuario.create(req.body)
+        return Usuario.create(newUser)
       })
       .then(newUser => {
         console.log(`User ${newUser.mail} registration succesful.`)
