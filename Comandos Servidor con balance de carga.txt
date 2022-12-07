@@ -1,0 +1,32 @@
+Forever
+npm i -g forever
+forever start index.js -p 8081
+forever start index.js -p 8082
+forever start index.js -p 8083
+forever list
+kill "pid"
+forever list
+forever stop "pid"
+forever stopall
+
+PM2
+npm i -g pm2
+pm2 start index.js --name="instance-01" -- -p 8081
+pm2 start index.js --name="instance-02" -- -p 8082 -m cluster
+pm2 start index.js --name="instance-03" --watch -- -p 8083 -m cluster
+pm2 log "id"
+kill "pid"
+pm2 stop "id"
+pm2 delete "id"
+
+Nginx
+Primera prueba Nginx
+/api/randoms => pm2 start index.js --name="instance-01" -- -p 8081 -m cluster
+/ => pm2 start index.js --name="instance-02" -- -p 8080
+
+Segunda prueba Nginx
+/api/randoms => pm2 start index.js --name="instance-01" -- -p 8082 -m cluster
+/api/randoms => pm2 start index.js --name="instance-02" -- -p 8083 -m cluster
+/api/randoms => pm2 start index.js --name="instance-03" -- -p 8084 -m cluster
+/api/randoms => pm2 start index.js --name="instance-04" -- -p 8085 -m cluster
+/ => pm2 start index.js --name="instance-02" -- -p 8080
