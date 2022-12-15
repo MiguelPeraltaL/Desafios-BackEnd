@@ -1,8 +1,9 @@
 const { Router } = require('express')
 const router = Router()
 const os = require('os')
+const compression = require('compression')
 
-router.get('/', (req, res) => {
+router.get('/',compression(), (req, res) => {
     const data = {
         'carpetaProyecto':process.cwd(),
         'idProceso':process.pid,

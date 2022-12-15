@@ -10,6 +10,7 @@ const router = require("./router/index")
 const { encryptPassword, isValidPassword } = require('./utils.js')
 const cluster = require('cluster')
 const os = require('os')
+const logger = require("./logs/logger.js")
 
 const { initSocket } = require('./socket')
 const { Strategy } = require('passport-local')
@@ -124,15 +125,13 @@ if(mode === 'cluster' && cluster.isPrimary){
   app.use(passport.session())
 
   ///////////////////////////////
-  let isAdmin = true
-  const validaUsuario = (req, res, next) => {
-      if (isAdmin){
-          next()
-      } else {
-          res.status(403).json({error: -1, descripcion: `Ruta ${req.url} método ${req.method} no autorizada`})
-      }
+  let today = new Date()
+  const logRuta = (req, res, next) => {
+    let now = today.toLocaleString()
+    logger.info(`[${now}] Ruta ${req.url} método ${req.method}`)
+    next()
   }
-  app.use(validaUsuario)
+  app.use(logRuta)
   //////////////////////////////
 
   app.get('/', (req, res) => {
@@ -146,6 +145,7 @@ if(mode === 'cluster' && cluster.isPrimary){
   })
 
   app.use((req, res) => {
+      logger.warn(`Ruta ${req.url} método ${req.method} no existe`)
       res.status(404).json({error: -1, descripcion: `Ruta ${req.url} método ${req.method} no implementada`})
   })
 

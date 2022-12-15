@@ -6,8 +6,11 @@ const express = require('express')
 const { Router } = express
 const router = Router()
 const dayjs = require('dayjs')
+const logger = require("../logs/logger.js")
 
 const database = process.env.DATABASE
+
+let today = new Date()
 
 router.post('/', (req, res) => {
     (async (run) => {
@@ -29,6 +32,8 @@ router.post('/', (req, res) => {
             // res.redirect("http://localhost:8080/")
         }catch (error) {
             console.log('Error router post:', error)
+            let now = today.toLocaleString()
+            logger.error(`[${now}] Error ruta /api/productos método ${req.method}: ${error}`)
             throw new Error(error.message)
         }
     })(true)
@@ -50,6 +55,8 @@ router.get('/', (req, res) => {
             // res.render('verProductos', { arregloProductos })
         }catch (error) {
             console.log('Error router getAll:', error)
+            let now = today.toLocaleString()
+            logger.error(`[${now}] Error ruta /api/productos método ${req.method}: ${error}`)
             throw new Error(error.message)
         }
     })(true)
@@ -70,6 +77,8 @@ router.get('/:id', (req, res) => {
             }
         }catch (error) {
             console.log('Error router getById:', error)
+            let now = today.toLocaleString()
+            logger.error(`[${now}] Error ruta /api/productos/${req.url} método ${req.method}: ${error}`)
             throw new Error(error.message)
         }
     })(true)
@@ -92,6 +101,8 @@ router.put('/:id', (req, res) => {
             }
         }catch (error) {
             console.log('Error router getById:', error)
+            let now = today.toLocaleString()
+            logger.error(`[${now}] Error ruta /api/productos/${req.url} método ${req.method}: ${error}`)
             throw new Error(error.message)
         }
     })(true)
@@ -112,6 +123,8 @@ router.delete('/:id', (req, res) => {
             }
         }catch (error) {
             console.log('Error router getById:', error)
+            let now = today.toLocaleString()
+            logger.error(`[${now}] Error ruta /api/productos/${req.url} método ${req.method}: ${error}`)
             throw new Error(error.message)
         }
     })(true)
