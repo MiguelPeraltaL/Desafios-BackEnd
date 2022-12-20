@@ -1,7 +1,9 @@
 var FirebaseAdmin = require("firebase-admin")
 const { v4: uuidv4 } = require('uuid')
 
-var serviceAccount = require("../../ecommercecoder-baca7-firebase-adminsdk-ufj6h-7a85b4dc50.json")
+// var serviceAccount = require("../../ecommercecoder-baca7-firebase-adminsdk-ufj6h-7a85b4dc50.json")
+const FIREBASE = process.env.FIREBASE
+let serviceAccount = JSON.parse(FIREBASE)
 FirebaseAdmin.initializeApp({
 credential: FirebaseAdmin.credential.cert(serviceAccount)
 })
