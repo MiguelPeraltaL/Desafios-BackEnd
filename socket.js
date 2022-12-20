@@ -33,7 +33,7 @@ function initSocket(httpServer) {
 }
 
 function setEvent(io){
-    io.on('connection', (socketCliente) => {
+    io.on('connection', async (socketCliente) => {
         console.log(`Se conecto nuevo cliente ID: ${socketCliente.id}`)
 
         socketCliente.emit('history-messages', messages)
@@ -45,10 +45,10 @@ function setEvent(io){
             data: data
         }
         // setTimeout(async ()=>{
-        setInterval(async ()=>{
+        // setInterval(async ()=>{
             let response = await axios(config)
             socketCliente.emit('total-productos', response.data)
-        }, 5000)
+        // }, 5000)
 
         socketCliente.on('new-message', async(data) => {
             let ahora = dayjs()
