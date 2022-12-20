@@ -28,10 +28,10 @@ const opts = {
 }
 const params = minimist(process.argv.slice(2), opts)
 
-const PORT = params.p
+const PORT = process.env.PORT || params.p
 const mode = params.m
 // const PORT = process.env.PORT || 8080
-const HOST = process.env.HOST
+// const HOST = process.env.HOST
 
 if(mode === 'cluster' && cluster.isPrimary){
   console.log(`Principal process.pid ${process.pid}`)
