@@ -7,7 +7,7 @@ const { schema, normalize, denormalize } = require('normalizr')
 
 let io
 
-const PORT = 8080
+const PORT = process.env.PORT || 8080
 
 const authorSchema = new schema.Entity('autores')
 
